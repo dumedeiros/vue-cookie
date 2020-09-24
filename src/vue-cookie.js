@@ -12,6 +12,7 @@
             Vue.prototype.$cookie = this;
             Vue.cookie = this;
         },
+      
         set: function (name, value, daysOrOptions) {
             var opts = daysOrOptions;
             if(Number.isInteger(daysOrOptions)) {
@@ -30,7 +31,19 @@
                 opts = Object.assign(options, opts);
             }
             this.set(name, '', opts);
-        }
+        },
+      
+        setRaw: function (name, value, daysOrOptions) {
+            var opts = daysOrOptions;
+            if (Number.isInteger(daysOrOptions)) {
+              opts = {expires: daysOrOptions};
+            }
+            return Cookie.setRaw(name, value, opts);
+        },
+        
+        getRaw: function (name) {
+            return Cookie.getRaw(name);
+        },
     };
 
     if (typeof exports == "object") {
